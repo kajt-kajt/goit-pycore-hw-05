@@ -29,10 +29,8 @@ def caching_fibonacci() -> Callable[[int],int]:
                 list(map(fibonacci,range(1000,n,1000)))
                 cache[n] = fibonacci(n-2) + fibonacci(n-1)
             else:
-                # to overcome recursion limit when working with n<-1000 let's warm cache
-                list(map(fibonacci,range(-1000,n,-1000)))
-                cache[n] = fibonacci(n+2) - fibonacci(n+1)
+                # to effectively use cache let's calculate negative index number using positive index one
+                return ((-1)**(n%2))*fibonacci(-n)
         return cache[n]
     
     return fibonacci
-
