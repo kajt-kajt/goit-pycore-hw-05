@@ -23,14 +23,13 @@ def caching_fibonacci() -> Callable[[int],int]:
             (int): corresponding value of Fibonacci number.
 
         """
+        if n < 0:
+            # to effectively use cache let's calculate negative index number using positive index one
+            return ((-1)**(n%2))*fibonacci(-n)
         if n not in cache:
-            if n > 0:
-                # to overcome recursion limit when working with n>1000 let's warm cache
-                list(map(fibonacci,range(1000,n,1000)))
-                cache[n] = fibonacci(n-2) + fibonacci(n-1)
-            else:
-                # to effectively use cache let's calculate negative index number using positive index one
-                return ((-1)**(n%2))*fibonacci(-n)
+            # to overcome recursion limit when working with n>1000 let's warm cache
+            list(map(fibonacci,range(1000,n,1000)))
+            cache[n] = fibonacci(n-2) + fibonacci(n-1)    
         return cache[n]
     
     return fibonacci
