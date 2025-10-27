@@ -84,7 +84,7 @@ def main():
         def inner(*args, **kwargs):
             return "Invalid command."
         return inner
-    
+
     # all handlers should take 2 arguments - args list and contacts dictionary
     handlers = defaultdict(default_handler)
     handlers["hello"] = lambda x,y: "How can I help you?"
